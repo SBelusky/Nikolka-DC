@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d528ed2bcae45479383939b8ef14783" Name="Diagram1" ZoomLevel="45">
+        <AssociationConnector Association="DenneCentrumDBModel.OsobyZmluvy" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.cvicenie" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.faktura" Width="1.5" PointX="7.5" PointY="7.375" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.inventar" Width="1.5" PointX="7.5" PointY="12.375" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.mesacny_vykaz" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.osoba" Width="1.5" PointX="5.25" PointY="16.125" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.permanentka" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.podujatie" Width="1.5" PointX="5.25" PointY="20.5" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.sablona" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.zakaznik" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="DenneCentrumDBModel.zmluva" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_Cvicenia_Permanentka" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_Cvicenia_Zakaznici" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_cvicenie_mesacny_vykaz" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_faktura_cvicenie" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_Faktury_Sablony" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_Faktury_Zakaznici" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_podujatie_mesacny_vykaz" />
+        <AssociationConnector Association="DenneCentrumDBModel.osoba_id" />
+        <AssociationConnector Association="DenneCentrumDBModel.FK_Permanentka_Zakaznici" />
+        <AssociationConnector Association="DenneCentrumDBModel.sablona_id" />
+        <AssociationConnector Association="DenneCentrumDBModel.vyuziva" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

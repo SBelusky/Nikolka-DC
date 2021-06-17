@@ -1,0 +1,915 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DenneCentrumDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cvicenie">
+          <Key>
+            <PropertyRef Name="cislo_cvicenia" />
+          </Key>
+          <Property Name="cislo_cvicenia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meno_dietata" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="priezvisko_dietata" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="datum_cvicenia" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="dlzka_cvicenia" Type="int" Nullable="false" />
+          <Property Name="prebehlo" Type="bit" Nullable="false" />
+          <Property Name="pokrok" Type="nvarchar(max)" />
+          <Property Name="poznamka" Type="nvarchar(max)" />
+          <Property Name="zakaznik_id" Type="int" Nullable="false" />
+          <Property Name="mesacny_vykaz_id" Type="nvarchar" MaxLength="25" />
+          <Property Name="permanentka_id" Type="int" />
+        </EntityType>
+        <EntityType Name="faktura">
+          <Key>
+            <PropertyRef Name="cislo_faktury" />
+          </Key>
+          <Property Name="cislo_faktury" Type="int" Nullable="false" />
+          <Property Name="typ" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="meno" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="priezvisko" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="datum_cvicenia" Type="nvarchar" MaxLength="25" />
+          <Property Name="datum_vystavenia" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="suma" Type="int" Nullable="false" />
+          <Property Name="sposob_uhrady" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="zakaznik_id" Type="int" Nullable="false" />
+          <Property Name="sablona_id" Type="int" Nullable="false" />
+          <Property Name="cvicenie_id" Type="int" />
+        </EntityType>
+        <EntityType Name="inventar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazov" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="datum_kupy" Type="nvarchar(max)" />
+          <Property Name="typ" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="servis" Type="nvarchar(max)" />
+          <Property Name="k_prevadzke" Type="bit" Nullable="false" />
+          <Property Name="poznamka" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="mesacny_vykaz">
+          <Key>
+            <PropertyRef Name="mesiac" />
+          </Key>
+          <Property Name="mesiac" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="najom" Type="int" />
+          <Property Name="najom_zaplatene" Type="bit" />
+          <Property Name="odvody" Type="int" />
+          <Property Name="odvody_zaplatene" Type="bit" />
+          <Property Name="cviceni_celkovo" Type="int" />
+          <Property Name="vyzbierane_peniaze_celkovo" Type="int" />
+        </EntityType>
+        <EntityType Name="osoba">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Meno" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Priezvisko" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="Ulica" Type="nvarchar(max)" />
+          <Property Name="Mesto" Type="nvarchar(max)" />
+          <Property Name="Login_meno" Type="nvarchar(max)" />
+          <Property Name="Login_heslo" Type="nvarchar(max)" />
+          <Property Name="Typ" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="permanentka">
+          <Key>
+            <PropertyRef Name="cislo_permanentky" />
+          </Key>
+          <Property Name="cislo_permanentky" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meno_dietata" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="priezvisko_dietata" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pocet_cviceni" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="datum_kupy" Type="nvarchar(max)" />
+          <Property Name="zakaznik_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="podujatie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazov" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ulica" Type="nvarchar" MaxLength="25" />
+          <Property Name="mesto" Type="nvarchar" MaxLength="25" />
+          <Property Name="datum_podujatia" Type="nvarchar" MaxLength="25" />
+          <Property Name="cas_zacatia" Type="nvarchar" MaxLength="25" />
+          <Property Name="doba_trvania" Type="nvarchar" MaxLength="25" />
+          <Property Name="vyhradene_peniaze" Type="int" />
+          <Property Name="pocet_osob" Type="int" />
+          <Property Name="vyzbierane_peniaze" Type="int" />
+          <Property Name="poznamka" Type="nvarchar(max)" />
+          <Property Name="mesacny_vykaz_id" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sablona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazov" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Typ" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Subor" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vyuziva">
+          <Key>
+            <PropertyRef Name="cvicenie_ID" />
+            <PropertyRef Name="inventar_ID" />
+          </Key>
+          <Property Name="cvicenie_ID" Type="int" Nullable="false" />
+          <Property Name="inventar_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zakaznik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meno_dietata" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="priezvisko_dietata" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ulica" Type="nvarchar" MaxLength="25" />
+          <Property Name="mesto" Type="nvarchar" MaxLength="25" />
+          <Property Name="sucastna_permanentka" Type="int" />
+          <Property Name="meno_rodica" Type="nvarchar" MaxLength="25" />
+          <Property Name="priezvisko_rodica" Type="nvarchar" MaxLength="25" />
+          <Property Name="email" Type="nvarchar" MaxLength="25" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="zdravotny_stav" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="zmluva">
+          <Key>
+            <PropertyRef Name="cislo_zmluvy" />
+          </Key>
+          <Property Name="cislo_zmluvy" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="typ" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="meno" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="priezvisko" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ulica" Type="nvarchar" MaxLength="25" />
+          <Property Name="mesto" Type="nvarchar" MaxLength="25" />
+          <Property Name="cislo_op" Type="nvarchar" MaxLength="25" />
+          <Property Name="rodne_cislo" Type="nvarchar" MaxLength="25" />
+          <Property Name="cislo_uctu" Type="nvarchar" MaxLength="25" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="25" />
+          <Property Name="email" Type="nvarchar" MaxLength="25" />
+          <Property Name="datum_zacatia" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="datum_konca" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="datum_vystavenia" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="hodinova_mzda" Type="int" />
+          <Property Name="poznamka" Type="nvarchar(max)" />
+          <Property Name="osoba_id" Type="int" Nullable="false" />
+          <Property Name="sablona_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cvicenia_Permanentka">
+          <End Role="permanentka" Type="Self.permanentka" Multiplicity="0..1" />
+          <End Role="cvicenie" Type="Self.cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permanentka">
+              <PropertyRef Name="cislo_permanentky" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="permanentka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cvicenia_Zakaznici">
+          <End Role="zakaznik" Type="Self.zakaznik" Multiplicity="1" />
+          <End Role="cvicenie" Type="Self.cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cvicenie_mesacny_vykaz">
+          <End Role="mesacny_vykaz" Type="Self.mesacny_vykaz" Multiplicity="0..1" />
+          <End Role="cvicenie" Type="Self.cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mesacny_vykaz">
+              <PropertyRef Name="mesiac" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="mesacny_vykaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_faktura_cvicenie">
+          <End Role="cvicenie" Type="Self.cvicenie" Multiplicity="0..1" />
+          <End Role="faktura" Type="Self.faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cvicenie">
+              <PropertyRef Name="cislo_cvicenia" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="cvicenie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Sablony">
+          <End Role="sablona" Type="Self.sablona" Multiplicity="1" />
+          <End Role="faktura" Type="Self.faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sablona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="sablona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Zakaznici">
+          <End Role="zakaznik" Type="Self.zakaznik" Multiplicity="1" />
+          <End Role="faktura" Type="Self.faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permanentka_Zakaznici">
+          <End Role="zakaznik" Type="Self.zakaznik" Multiplicity="1" />
+          <End Role="permanentka" Type="Self.permanentka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="permanentka">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podujatie_mesacny_vykaz">
+          <End Role="mesacny_vykaz" Type="Self.mesacny_vykaz" Multiplicity="1" />
+          <End Role="podujatie" Type="Self.podujatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mesacny_vykaz">
+              <PropertyRef Name="mesiac" />
+            </Principal>
+            <Dependent Role="podujatie">
+              <PropertyRef Name="mesacny_vykaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vyuziva_cvicenie">
+          <End Role="cvicenie" Type="Self.cvicenie" Multiplicity="1" />
+          <End Role="vyuziva" Type="Self.vyuziva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cvicenie">
+              <PropertyRef Name="cislo_cvicenia" />
+            </Principal>
+            <Dependent Role="vyuziva">
+              <PropertyRef Name="cvicenie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vyuziva_inventar">
+          <End Role="inventar" Type="Self.inventar" Multiplicity="1" />
+          <End Role="vyuziva" Type="Self.vyuziva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inventar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vyuziva">
+              <PropertyRef Name="inventar_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="osoba_id">
+          <End Role="osoba" Type="Self.osoba" Multiplicity="1" />
+          <End Role="zmluva" Type="Self.zmluva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="osoba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="zmluva">
+              <PropertyRef Name="osoba_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sablona_id">
+          <End Role="sablona" Type="Self.sablona" Multiplicity="1" />
+          <End Role="zmluva" Type="Self.zmluva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sablona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="zmluva">
+              <PropertyRef Name="sablona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DenneCentrumDBModelStoreContainer">
+          <EntitySet Name="cvicenie" EntityType="Self.cvicenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="faktura" EntityType="Self.faktura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventar" EntityType="Self.inventar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mesacny_vykaz" EntityType="Self.mesacny_vykaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="osoba" EntityType="Self.osoba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="permanentka" EntityType="Self.permanentka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="podujatie" EntityType="Self.podujatie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sablona" EntityType="Self.sablona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vyuziva" EntityType="Self.vyuziva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zakaznik" EntityType="Self.zakaznik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zmluva" EntityType="Self.zmluva" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cvicenia_Permanentka" Association="Self.FK_Cvicenia_Permanentka">
+            <End Role="permanentka" EntitySet="permanentka" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cvicenia_Zakaznici" Association="Self.FK_Cvicenia_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cvicenie_mesacny_vykaz" Association="Self.FK_cvicenie_mesacny_vykaz">
+            <End Role="mesacny_vykaz" EntitySet="mesacny_vykaz" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_faktura_cvicenie" Association="Self.FK_faktura_cvicenie">
+            <End Role="cvicenie" EntitySet="cvicenie" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Sablony" Association="Self.FK_Faktury_Sablony">
+            <End Role="sablona" EntitySet="sablona" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Zakaznici" Association="Self.FK_Faktury_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permanentka_Zakaznici" Association="Self.FK_Permanentka_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="permanentka" EntitySet="permanentka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podujatie_mesacny_vykaz" Association="Self.FK_podujatie_mesacny_vykaz">
+            <End Role="mesacny_vykaz" EntitySet="mesacny_vykaz" />
+            <End Role="podujatie" EntitySet="podujatie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vyuziva_cvicenie" Association="Self.FK_vyuziva_cvicenie">
+            <End Role="cvicenie" EntitySet="cvicenie" />
+            <End Role="vyuziva" EntitySet="vyuziva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vyuziva_inventar" Association="Self.FK_vyuziva_inventar">
+            <End Role="inventar" EntitySet="inventar" />
+            <End Role="vyuziva" EntitySet="vyuziva" />
+          </AssociationSet>
+          <AssociationSet Name="osoba_id" Association="Self.osoba_id">
+            <End Role="osoba" EntitySet="osoba" />
+            <End Role="zmluva" EntitySet="zmluva" />
+          </AssociationSet>
+          <AssociationSet Name="sablona_id" Association="Self.sablona_id">
+            <End Role="sablona" EntitySet="sablona" />
+            <End Role="zmluva" EntitySet="zmluva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DenneCentrumDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cvicenie" EntityType="DenneCentrumDBModel.cvicenie" />
+          <EntitySet Name="faktura" EntityType="DenneCentrumDBModel.faktura" />
+          <EntitySet Name="inventar" EntityType="DenneCentrumDBModel.inventar" />
+          <EntitySet Name="mesacny_vykaz" EntityType="DenneCentrumDBModel.mesacny_vykaz" />
+          <EntitySet Name="osoba" EntityType="DenneCentrumDBModel.osoba" />
+          <EntitySet Name="permanentka" EntityType="DenneCentrumDBModel.permanentka" />
+          <EntitySet Name="podujatie" EntityType="DenneCentrumDBModel.podujatie" />
+          <EntitySet Name="sablona" EntityType="DenneCentrumDBModel.sablona" />
+          <EntitySet Name="zakaznik" EntityType="DenneCentrumDBModel.zakaznik" />
+          <EntitySet Name="zmluva" EntityType="DenneCentrumDBModel.zmluva" />
+          <AssociationSet Name="FK_Cvicenia_Permanentka" Association="DenneCentrumDBModel.FK_Cvicenia_Permanentka">
+            <End Role="permanentka" EntitySet="permanentka" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cvicenia_Zakaznici" Association="DenneCentrumDBModel.FK_Cvicenia_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cvicenie_mesacny_vykaz" Association="DenneCentrumDBModel.FK_cvicenie_mesacny_vykaz">
+            <End Role="mesacny_vykaz" EntitySet="mesacny_vykaz" />
+            <End Role="cvicenie" EntitySet="cvicenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_faktura_cvicenie" Association="DenneCentrumDBModel.FK_faktura_cvicenie">
+            <End Role="cvicenie" EntitySet="cvicenie" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Sablony" Association="DenneCentrumDBModel.FK_Faktury_Sablony">
+            <End Role="sablona" EntitySet="sablona" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Zakaznici" Association="DenneCentrumDBModel.FK_Faktury_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="faktura" EntitySet="faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podujatie_mesacny_vykaz" Association="DenneCentrumDBModel.FK_podujatie_mesacny_vykaz">
+            <End Role="mesacny_vykaz" EntitySet="mesacny_vykaz" />
+            <End Role="podujatie" EntitySet="podujatie" />
+          </AssociationSet>
+          <AssociationSet Name="osoba_id" Association="DenneCentrumDBModel.osoba_id">
+            <End Role="osoba" EntitySet="osoba" />
+            <End Role="zmluva" EntitySet="zmluva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permanentka_Zakaznici" Association="DenneCentrumDBModel.FK_Permanentka_Zakaznici">
+            <End Role="zakaznik" EntitySet="zakaznik" />
+            <End Role="permanentka" EntitySet="permanentka" />
+          </AssociationSet>
+          <AssociationSet Name="sablona_id" Association="DenneCentrumDBModel.sablona_id">
+            <End Role="sablona" EntitySet="sablona" />
+            <End Role="zmluva" EntitySet="zmluva" />
+          </AssociationSet>
+          <AssociationSet Name="vyuziva" Association="DenneCentrumDBModel.vyuziva">
+            <End Role="cvicenie" EntitySet="cvicenie" />
+            <End Role="inventar" EntitySet="inventar" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="cvicenie">
+          <Key>
+            <PropertyRef Name="cislo_cvicenia" />
+          </Key>
+          <Property Name="cislo_cvicenia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meno_dietata" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko_dietata" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_cvicenia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="dlzka_cvicenia" Type="Int32" Nullable="false" />
+          <Property Name="prebehlo" Type="Boolean" Nullable="false" />
+          <Property Name="pokrok" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="poznamka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zakaznik_id" Type="Int32" Nullable="false" />
+          <Property Name="mesacny_vykaz_id" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="permanentka_id" Type="Int32" />
+          <NavigationProperty Name="permanentka" Relationship="DenneCentrumDBModel.FK_Cvicenia_Permanentka" FromRole="cvicenie" ToRole="permanentka" />
+          <NavigationProperty Name="zakaznik" Relationship="DenneCentrumDBModel.FK_Cvicenia_Zakaznici" FromRole="cvicenie" ToRole="zakaznik" />
+          <NavigationProperty Name="mesacny_vykaz" Relationship="DenneCentrumDBModel.FK_cvicenie_mesacny_vykaz" FromRole="cvicenie" ToRole="mesacny_vykaz" />
+          <NavigationProperty Name="faktura" Relationship="DenneCentrumDBModel.FK_faktura_cvicenie" FromRole="cvicenie" ToRole="faktura" />
+          <NavigationProperty Name="inventar" Relationship="DenneCentrumDBModel.vyuziva" FromRole="cvicenie" ToRole="inventar" />
+        </EntityType>
+        <EntityType Name="faktura">
+          <Key>
+            <PropertyRef Name="cislo_faktury" />
+          </Key>
+          <Property Name="cislo_faktury" Type="Int32" Nullable="false" />
+          <Property Name="typ" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="meno" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_cvicenia" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_vystavenia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="suma" Type="Int32" Nullable="false" />
+          <Property Name="sposob_uhrady" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="zakaznik_id" Type="Int32" Nullable="false" />
+          <Property Name="sablona_id" Type="Int32" Nullable="false" />
+          <Property Name="cvicenie_id" Type="Int32" />
+          <NavigationProperty Name="cvicenie" Relationship="DenneCentrumDBModel.FK_faktura_cvicenie" FromRole="faktura" ToRole="cvicenie" />
+          <NavigationProperty Name="sablona" Relationship="DenneCentrumDBModel.FK_Faktury_Sablony" FromRole="faktura" ToRole="sablona" />
+          <NavigationProperty Name="zakaznik" Relationship="DenneCentrumDBModel.FK_Faktury_Zakaznici" FromRole="faktura" ToRole="zakaznik" />
+        </EntityType>
+        <EntityType Name="inventar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazov" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="datum_kupy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="typ" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="servis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="k_prevadzke" Type="Boolean" Nullable="false" />
+          <Property Name="poznamka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cvicenie" Relationship="DenneCentrumDBModel.vyuziva" FromRole="inventar" ToRole="cvicenie" />
+        </EntityType>
+        <EntityType Name="mesacny_vykaz">
+          <Key>
+            <PropertyRef Name="mesiac" />
+          </Key>
+          <Property Name="mesiac" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="najom" Type="Int32" />
+          <Property Name="najom_zaplatene" Type="Boolean" />
+          <Property Name="odvody" Type="Int32" />
+          <Property Name="odvody_zaplatene" Type="Boolean" />
+          <Property Name="cviceni_celkovo" Type="Int32" />
+          <Property Name="vyzbierane_peniaze_celkovo" Type="Int32" />
+          <NavigationProperty Name="cvicenie" Relationship="DenneCentrumDBModel.FK_cvicenie_mesacny_vykaz" FromRole="mesacny_vykaz" ToRole="cvicenie" />
+          <NavigationProperty Name="podujatie" Relationship="DenneCentrumDBModel.FK_podujatie_mesacny_vykaz" FromRole="mesacny_vykaz" ToRole="podujatie" />
+        </EntityType>
+        <EntityType Name="osoba">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priezvisko" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ulica" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mesto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login_meno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login_heslo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Typ" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="zmluva" Relationship="DenneCentrumDBModel.osoba_id" FromRole="osoba" ToRole="zmluva" />
+        </EntityType>
+        <EntityType Name="permanentka">
+          <Key>
+            <PropertyRef Name="cislo_permanentky" />
+          </Key>
+          <Property Name="cislo_permanentky" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meno_dietata" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko_dietata" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pocet_cviceni" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="datum_kupy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zakaznik_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cvicenie" Relationship="DenneCentrumDBModel.FK_Cvicenia_Permanentka" FromRole="permanentka" ToRole="cvicenie" />
+          <NavigationProperty Name="zakaznik" Relationship="DenneCentrumDBModel.FK_Permanentka_Zakaznici" FromRole="permanentka" ToRole="zakaznik" />
+        </EntityType>
+        <EntityType Name="podujatie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazov" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ulica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="mesto" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_podujatia" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cas_zacatia" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="doba_trvania" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="vyhradene_peniaze" Type="Int32" />
+          <Property Name="pocet_osob" Type="Int32" />
+          <Property Name="vyzbierane_peniaze" Type="Int32" />
+          <Property Name="poznamka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mesacny_vykaz_id" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="mesacny_vykaz" Relationship="DenneCentrumDBModel.FK_podujatie_mesacny_vykaz" FromRole="podujatie" ToRole="mesacny_vykaz" />
+        </EntityType>
+        <EntityType Name="sablona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazov" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Typ" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="faktura" Relationship="DenneCentrumDBModel.FK_Faktury_Sablony" FromRole="sablona" ToRole="faktura" />
+          <NavigationProperty Name="zmluva" Relationship="DenneCentrumDBModel.sablona_id" FromRole="sablona" ToRole="zmluva" />
+        </EntityType>
+        <EntityType Name="zakaznik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meno_dietata" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko_dietata" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ulica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="mesto" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="sucastna_permanentka" Type="Int32" />
+          <Property Name="meno_rodica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko_rodica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="telefon" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="zdravotny_stav" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cvicenie" Relationship="DenneCentrumDBModel.FK_Cvicenia_Zakaznici" FromRole="zakaznik" ToRole="cvicenie" />
+          <NavigationProperty Name="faktura" Relationship="DenneCentrumDBModel.FK_Faktury_Zakaznici" FromRole="zakaznik" ToRole="faktura" />
+          <NavigationProperty Name="permanentka" Relationship="DenneCentrumDBModel.FK_Permanentka_Zakaznici" FromRole="zakaznik" ToRole="permanentka" />
+        </EntityType>
+        <EntityType Name="zmluva">
+          <Key>
+            <PropertyRef Name="cislo_zmluvy" />
+          </Key>
+          <Property Name="cislo_zmluvy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="typ" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="meno" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="priezvisko" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ulica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="mesto" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cislo_op" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="rodne_cislo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cislo_uctu" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="telefon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_zacatia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_konca" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="datum_vystavenia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hodinova_mzda" Type="Int32" />
+          <Property Name="poznamka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="osoba_id" Type="Int32" Nullable="false" />
+          <Property Name="sablona_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="osoba" Relationship="DenneCentrumDBModel.osoba_id" FromRole="zmluva" ToRole="osoba" />
+          <NavigationProperty Name="sablona" Relationship="DenneCentrumDBModel.sablona_id" FromRole="zmluva" ToRole="sablona" />
+        </EntityType>
+        <Association Name="FK_Cvicenia_Permanentka">
+          <End Type="DenneCentrumDBModel.permanentka" Role="permanentka" Multiplicity="0..1" />
+          <End Type="DenneCentrumDBModel.cvicenie" Role="cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permanentka">
+              <PropertyRef Name="cislo_permanentky" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="permanentka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cvicenia_Zakaznici">
+          <End Type="DenneCentrumDBModel.zakaznik" Role="zakaznik" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.cvicenie" Role="cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cvicenie_mesacny_vykaz">
+          <End Type="DenneCentrumDBModel.mesacny_vykaz" Role="mesacny_vykaz" Multiplicity="0..1" />
+          <End Type="DenneCentrumDBModel.cvicenie" Role="cvicenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mesacny_vykaz">
+              <PropertyRef Name="mesiac" />
+            </Principal>
+            <Dependent Role="cvicenie">
+              <PropertyRef Name="mesacny_vykaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_faktura_cvicenie">
+          <End Type="DenneCentrumDBModel.cvicenie" Role="cvicenie" Multiplicity="0..1" />
+          <End Type="DenneCentrumDBModel.faktura" Role="faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cvicenie">
+              <PropertyRef Name="cislo_cvicenia" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="cvicenie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Sablony">
+          <End Type="DenneCentrumDBModel.sablona" Role="sablona" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.faktura" Role="faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sablona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="sablona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Zakaznici">
+          <End Type="DenneCentrumDBModel.zakaznik" Role="zakaznik" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.faktura" Role="faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="faktura">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podujatie_mesacny_vykaz">
+          <End Type="DenneCentrumDBModel.mesacny_vykaz" Role="mesacny_vykaz" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.podujatie" Role="podujatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mesacny_vykaz">
+              <PropertyRef Name="mesiac" />
+            </Principal>
+            <Dependent Role="podujatie">
+              <PropertyRef Name="mesacny_vykaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="osoba_id">
+          <End Type="DenneCentrumDBModel.osoba" Role="osoba" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.zmluva" Role="zmluva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="osoba">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="zmluva">
+              <PropertyRef Name="osoba_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permanentka_Zakaznici">
+          <End Type="DenneCentrumDBModel.zakaznik" Role="zakaznik" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.permanentka" Role="permanentka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zakaznik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="permanentka">
+              <PropertyRef Name="zakaznik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sablona_id">
+          <End Type="DenneCentrumDBModel.sablona" Role="sablona" Multiplicity="1" />
+          <End Type="DenneCentrumDBModel.zmluva" Role="zmluva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sablona">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="zmluva">
+              <PropertyRef Name="sablona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vyuziva">
+          <End Type="DenneCentrumDBModel.cvicenie" Role="cvicenie" Multiplicity="*" />
+          <End Type="DenneCentrumDBModel.inventar" Role="inventar" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DenneCentrumDBModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="cvicenie">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.cvicenie">
+              <MappingFragment StoreEntitySet="cvicenie">
+                <ScalarProperty Name="permanentka_id" ColumnName="permanentka_id" />
+                <ScalarProperty Name="mesacny_vykaz_id" ColumnName="mesacny_vykaz_id" />
+                <ScalarProperty Name="zakaznik_id" ColumnName="zakaznik_id" />
+                <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+                <ScalarProperty Name="pokrok" ColumnName="pokrok" />
+                <ScalarProperty Name="prebehlo" ColumnName="prebehlo" />
+                <ScalarProperty Name="dlzka_cvicenia" ColumnName="dlzka_cvicenia" />
+                <ScalarProperty Name="datum_cvicenia" ColumnName="datum_cvicenia" />
+                <ScalarProperty Name="priezvisko_dietata" ColumnName="priezvisko_dietata" />
+                <ScalarProperty Name="meno_dietata" ColumnName="meno_dietata" />
+                <ScalarProperty Name="cislo_cvicenia" ColumnName="cislo_cvicenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="faktura">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.faktura">
+              <MappingFragment StoreEntitySet="faktura">
+                <ScalarProperty Name="cvicenie_id" ColumnName="cvicenie_id" />
+                <ScalarProperty Name="sablona_id" ColumnName="sablona_id" />
+                <ScalarProperty Name="zakaznik_id" ColumnName="zakaznik_id" />
+                <ScalarProperty Name="sposob_uhrady" ColumnName="sposob_uhrady" />
+                <ScalarProperty Name="suma" ColumnName="suma" />
+                <ScalarProperty Name="datum_vystavenia" ColumnName="datum_vystavenia" />
+                <ScalarProperty Name="datum_cvicenia" ColumnName="datum_cvicenia" />
+                <ScalarProperty Name="priezvisko" ColumnName="priezvisko" />
+                <ScalarProperty Name="meno" ColumnName="meno" />
+                <ScalarProperty Name="typ" ColumnName="typ" />
+                <ScalarProperty Name="cislo_faktury" ColumnName="cislo_faktury" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventar">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.inventar">
+              <MappingFragment StoreEntitySet="inventar">
+                <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+                <ScalarProperty Name="k_prevadzke" ColumnName="k_prevadzke" />
+                <ScalarProperty Name="servis" ColumnName="servis" />
+                <ScalarProperty Name="typ" ColumnName="typ" />
+                <ScalarProperty Name="datum_kupy" ColumnName="datum_kupy" />
+                <ScalarProperty Name="nazov" ColumnName="nazov" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mesacny_vykaz">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.mesacny_vykaz">
+              <MappingFragment StoreEntitySet="mesacny_vykaz">
+                <ScalarProperty Name="vyzbierane_peniaze_celkovo" ColumnName="vyzbierane_peniaze_celkovo" />
+                <ScalarProperty Name="cviceni_celkovo" ColumnName="cviceni_celkovo" />
+                <ScalarProperty Name="odvody_zaplatene" ColumnName="odvody_zaplatene" />
+                <ScalarProperty Name="odvody" ColumnName="odvody" />
+                <ScalarProperty Name="najom_zaplatene" ColumnName="najom_zaplatene" />
+                <ScalarProperty Name="najom" ColumnName="najom" />
+                <ScalarProperty Name="mesiac" ColumnName="mesiac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="osoba">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.osoba">
+              <MappingFragment StoreEntitySet="osoba">
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Login_heslo" ColumnName="Login_heslo" />
+                <ScalarProperty Name="Login_meno" ColumnName="Login_meno" />
+                <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Priezvisko" ColumnName="Priezvisko" />
+                <ScalarProperty Name="Meno" ColumnName="Meno" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="permanentka">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.permanentka">
+              <MappingFragment StoreEntitySet="permanentka">
+                <ScalarProperty Name="zakaznik_id" ColumnName="zakaznik_id" />
+                <ScalarProperty Name="datum_kupy" ColumnName="datum_kupy" />
+                <ScalarProperty Name="pocet_cviceni" ColumnName="pocet_cviceni" />
+                <ScalarProperty Name="priezvisko_dietata" ColumnName="priezvisko_dietata" />
+                <ScalarProperty Name="meno_dietata" ColumnName="meno_dietata" />
+                <ScalarProperty Name="cislo_permanentky" ColumnName="cislo_permanentky" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="podujatie">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.podujatie">
+              <MappingFragment StoreEntitySet="podujatie">
+                <ScalarProperty Name="mesacny_vykaz_id" ColumnName="mesacny_vykaz_id" />
+                <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+                <ScalarProperty Name="vyzbierane_peniaze" ColumnName="vyzbierane_peniaze" />
+                <ScalarProperty Name="pocet_osob" ColumnName="pocet_osob" />
+                <ScalarProperty Name="vyhradene_peniaze" ColumnName="vyhradene_peniaze" />
+                <ScalarProperty Name="doba_trvania" ColumnName="doba_trvania" />
+                <ScalarProperty Name="cas_zacatia" ColumnName="cas_zacatia" />
+                <ScalarProperty Name="datum_podujatia" ColumnName="datum_podujatia" />
+                <ScalarProperty Name="mesto" ColumnName="mesto" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="nazov" ColumnName="nazov" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sablona">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.sablona">
+              <MappingFragment StoreEntitySet="sablona">
+                <ScalarProperty Name="Subor" ColumnName="Subor" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Nazov" ColumnName="Nazov" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zakaznik">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.zakaznik">
+              <MappingFragment StoreEntitySet="zakaznik">
+                <ScalarProperty Name="zdravotny_stav" ColumnName="zdravotny_stav" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="priezvisko_rodica" ColumnName="priezvisko_rodica" />
+                <ScalarProperty Name="meno_rodica" ColumnName="meno_rodica" />
+                <ScalarProperty Name="sucastna_permanentka" ColumnName="sucastna_permanentka" />
+                <ScalarProperty Name="mesto" ColumnName="mesto" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="priezvisko_dietata" ColumnName="priezvisko_dietata" />
+                <ScalarProperty Name="meno_dietata" ColumnName="meno_dietata" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zmluva">
+            <EntityTypeMapping TypeName="DenneCentrumDBModel.zmluva">
+              <MappingFragment StoreEntitySet="zmluva">
+                <ScalarProperty Name="sablona_id" ColumnName="sablona_id" />
+                <ScalarProperty Name="osoba_id" ColumnName="osoba_id" />
+                <ScalarProperty Name="poznamka" ColumnName="poznamka" />
+                <ScalarProperty Name="hodinova_mzda" ColumnName="hodinova_mzda" />
+                <ScalarProperty Name="datum_vystavenia" ColumnName="datum_vystavenia" />
+                <ScalarProperty Name="datum_konca" ColumnName="datum_konca" />
+                <ScalarProperty Name="datum_zacatia" ColumnName="datum_zacatia" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="cislo_uctu" ColumnName="cislo_uctu" />
+                <ScalarProperty Name="rodne_cislo" ColumnName="rodne_cislo" />
+                <ScalarProperty Name="cislo_op" ColumnName="cislo_op" />
+                <ScalarProperty Name="mesto" ColumnName="mesto" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="priezvisko" ColumnName="priezvisko" />
+                <ScalarProperty Name="meno" ColumnName="meno" />
+                <ScalarProperty Name="typ" ColumnName="typ" />
+                <ScalarProperty Name="cislo_zmluvy" ColumnName="cislo_zmluvy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="vyuziva" TypeName="DenneCentrumDBModel.vyuziva" StoreEntitySet="vyuziva">
+            <EndProperty Name="inventar">
+              <ScalarProperty Name="id" ColumnName="inventar_ID" />
+            </EndProperty>
+            <EndProperty Name="cvicenie">
+              <ScalarProperty Name="cislo_cvicenia" ColumnName="cvicenie_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

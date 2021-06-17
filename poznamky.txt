@@ -1,0 +1,24 @@
+[Obsah] NVARCHAR(MAX)		- pre clanky alebo to co sa pise aby nemal presne daty rozsah
+Podujaria			- iba prachy co sa vyzbierali, vlozi sa to do chodu ako "Vyzbierane peniaze z podujatí"
+ChodID				- bude sa davat prvy den mesiaci napr. 1.1.2018 pre tabulky Podujatia+Cvicenia
+-------------
+lb -> label
+bt -> button
+tx -> textbox
+mi -> menu item
+dg -> datagrid
+cb -> combobox
+dt_ -> data table
+da_ -> data adapter
+ds_ -> data set
+dtp -> date time picker
+chb -> checkbox
+str -> string
+-------------
+CamelCase 			-> formular
+camel_case 			-> pre instancie. premenne
+Autosize pre WForm 		-> true -> bude vidno vsetko co je v o vnutri -> ODPORUCA SA
+FormBorderSize 			-> FixedSingle -> nedokazem zvacsit/zmensit okno
+ShowDialog()			-> neda sa klikat na rodica ked je otvorene dcesrske okno
+AutoSizeMode			-> fill -> pre posledny stlpec, potiahne sa na koniec gridu (property v "Edit Columns")
+dg.CurrentRow.Index		-> index oznaceneho riadku v datagride
